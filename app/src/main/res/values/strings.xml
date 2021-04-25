@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">JetpacProDua</string>
+    <string name="nobar_app">Nobar App</string>
+    <string name="movie_and_tv">Movie and Tv</string>
+    <string name="motive">MOTIV</string>
+    <string name="title_movie">Judul Movie</string>
+    <string name="popular_item">Populer Item</string>
+    <string name="todo">TODO</string>
+    <string name="watch_your_favorite_movie">Watch your favorite movie</string>
+    <string name="watch_your_favourite_tv">Watch your favourite Tv</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="enjoy_and_fun">Enjoy and fun</string>
+    <string name="movie">Movie</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="production">Production</string>
+    <string name="character">Character</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.jetpacprodua">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:icon="@mipmap/ic_pop"
+        android:roundIcon="@mipmap/ic_pop_round"
+        android:supportsRtl="true"
+        android:label="@string/motive"
+        android:theme="@style/Theme.JetpacProDua">
+        <activity android:name=".ui.splash.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.menu.MenuActivity"
+            android:label="@string/motive"
+            android:theme="@style/Theme.JetpacProDua" />
+
+        <activity
+            android:name=".ui.movie.MovieActivity"
+            android:theme="@style/Theme.JetpacProDua" />
+        <activity
+            android:name=".ui.tv.TvActivity"
+            android:theme="@style/Theme.JetpacProDua" />
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:theme="@style/Theme.JetpacProDua" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
