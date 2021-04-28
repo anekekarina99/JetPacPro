@@ -16,7 +16,7 @@ class NetworkConfig {
                 .addInterceptor(logInter)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/")
+                .baseUrl("https://api.themoviedb.org/3/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(myClient)
                 .build()

@@ -10,33 +10,21 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("3/movie/popular")
+    @GET("movie/popular?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK&page=1&region=KR")
     fun getMovieKoreaPopular(
-        @Query("api_key") apiKey : String = "5829da11901d652c0ebdcb4c5bfa7015",
-        @Query("language") language: String = "en-UK",
-        @Query("page") page : Int = 1,
-        @Query("region") region : String = "KR"
     ): Call<MovieRemoteResponse>
 
-    @GET("3/movie/{id}")
+    @GET("movie/{id}?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK")
     fun getMovieKoreaDetail(
         @Path("id") id: Int,
-        @Query("api_key") apiKey : String = "5829da11901d652c0ebdcb4c5bfa7015",
-        @Query("language") language: String = "en-UK"
     ): Call<MovieRemoteResponse>
 
-    @GET("3/tv/popular")
+    @GET("tv/popular?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK&page=1&region=KR")
     fun getTvKoreaPopular(
-        @Query("api_key") apiKey : String = "5829da11901d652c0ebdcb4c5bfa7015",
-        @Query("language") language: String = "en-UK",
-        @Query("page") page : Int = 1,
-        @Query("region") region : String = "KR"
     ): Call<TvRemoteResponse>
 
-    @GET("3/tv/{id}")
+    @GET("tv/{id}?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK")
     fun getTvKoreaDetail(
         @Path("id") id: Int,
-        @Query("api_key") apiKey : String = "5829da11901d652c0ebdcb4c5bfa7015",
-        @Query("language") language: String = "en-UK"
     ): Call<TvRemoteResponse>
 }

@@ -20,11 +20,14 @@ class TvActivity : AppCompatActivity() {
         bind = ActivityTvBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
-
         val factory = ViewModelFactory.getInst(this)
         val viewModel = ViewModelProvider(this, factory)[TvViewModel::class.java]
         val resultTv = viewModel.getTvKorea()
-        val adapterTv  = TvAdapter()
+        val adapterTv = TvAdapter()
+
+        bind.rvTv.layoutManager = LinearLayoutManager(this)
+        bind.rvTv.setHasFixedSize(true)
+        bind.rvTv.adapter = adapterTv
 
         resultTv.observe(this, {
             adapterTv.setTv(it)
@@ -34,17 +37,9 @@ class TvActivity : AppCompatActivity() {
                     showSelectedTv(data)
                 }
             })
+
         })
 
-        setRvTv()
-        bind.rvTv.adapter = adapterTv
-
-
-    }
-
-    private fun setRvTv() {
-        bind.rvTv.layoutManager = LinearLayoutManager(this)
-        bind.rvTv.setHasFixedSize(true)
     }
 
 

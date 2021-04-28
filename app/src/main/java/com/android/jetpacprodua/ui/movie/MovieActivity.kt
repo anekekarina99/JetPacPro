@@ -14,7 +14,7 @@ import com.android.jetpacprodua.viewModel.ViewModelFactory
 
 internal class MovieActivity : AppCompatActivity() {
     private lateinit var bind: ActivityMovieBinding
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityMovieBinding.inflate(layoutInflater)
@@ -26,7 +26,12 @@ internal class MovieActivity : AppCompatActivity() {
         val resultMovie = viewModel.getMovieKorea()
         val adapterM = MovieAdapter()
 
+        bind.rvMovie.layoutManager = LinearLayoutManager(this)
+        bind.rvMovie.setHasFixedSize(true)
+
+
         resultMovie.observe(this, {
+            bind.rvMovie.adapter = adapterM
             adapterM.setMovie(it)
             adapterM.notifyDataSetChanged()
             adapterM.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
@@ -34,17 +39,9 @@ internal class MovieActivity : AppCompatActivity() {
                     showSelectedMovie(data)
                 }
             })
+
         })
 
-        setRvMovie()
-        bind.rvMovie.adapter = adapterM
-
-
-    }
-
-    private fun setRvMovie() {
-        bind.rvMovie.layoutManager = LinearLayoutManager(this)
-        bind.rvMovie.setHasFixedSize(true)
 
     }
 
