@@ -20,13 +20,13 @@ class ViewModelFactory private constructor(private val factAllRepos: AllReposito
         fun getInst(context: Context): ViewModelFactory =
             inst ?: synchronized(this)
             {
-                ViewModelFactory(Inject.provideRepository(context)).apply {
+                ViewModelFactory(Inject.provideRepository()).apply {
                         inst = this
                 }
             }
     }
 
-    @Suppress("UNCHECKED_CAST")
+    //@Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MovieViewModel::class.java) ->{

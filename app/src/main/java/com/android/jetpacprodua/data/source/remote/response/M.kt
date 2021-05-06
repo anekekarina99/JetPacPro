@@ -1,15 +1,13 @@
-package com.android.jetpacprodua.data.source.local.entity
+package com.android.jetpacprodua.data.source.remote.response
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class MovieKorea(
+data class M (
+
     @SerializedName("id")
     val id: Int,
-    @SerializedName("original_title")
-    val originalTitle: String,
+    @SerializedName("title")
+    val title : String,
     @SerializedName("overview")
     val overview: String,
     @SerializedName("popularity")
@@ -19,6 +17,5 @@ data class MovieKorea(
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Int
-
-) : Parcelable
+    val voteCount: Int,
+)

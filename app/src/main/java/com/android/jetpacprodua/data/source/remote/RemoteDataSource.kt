@@ -1,11 +1,9 @@
 package com.android.jetpacprodua.data.source.remote
 
 import android.util.Log
-import com.android.jetpacprodua.data.source.local.entity.MovieKorea
-import com.android.jetpacprodua.data.source.local.entity.TvKorea
 import com.android.jetpacprodua.data.source.remote.api.NetworkConfig
-import com.android.jetpacprodua.data.source.remote.response.MovieRemoteResponse
-import com.android.jetpacprodua.data.source.remote.response.TvRemoteResponse
+import com.android.jetpacprodua.data.source.remote.response.*
+import com.android.jetpacprodua.utils.Constant.Companion.API_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,16 +21,15 @@ class RemoteDataSource {
     }
 
 
-    fun getMovieKoreaPopular(callback: MovieKoreaCallback) {
-        //espreso
-        NetworkConfig.getApiService().getMovieKoreaPopular()
+    fun getMovieKoreaPopular(callback: MovieKoreaCallback) =//espreso
+        NetworkConfig.getApiService().getMoviePopular(API_KEY)
             .enqueue(object : Callback<MovieRemoteResponse> {
                 override fun onResponse(
                     call: Call<MovieRemoteResponse>,
                     response: Response<MovieRemoteResponse>
                 ) {
                     Log.d(this@RemoteDataSource.toString(), "get Movie Korea Berhasil")
-                    callback.getMovieKoreaAsync(response.body()?.hasil)
+                    callback.getMovieKoreaAsync(response.body()?.results)
                     //espreso
                 }
 
@@ -42,18 +39,17 @@ class RemoteDataSource {
                 }
 
             })
-    }
 
-    fun getTvKoreaPopular(callbackTv: TvKoreaCallback) {
+    fun getTvKoreaPopular(callback: TvKoreaCallback) {
         //espreso
-        NetworkConfig.getApiService().getTvKoreaPopular()
+        NetworkConfig.getApiService().getTvList(API_KEY)
             .enqueue(object : Callback<TvRemoteResponse> {
                 override fun onResponse(
                     call: Call<TvRemoteResponse>,
                     response: Response<TvRemoteResponse?>
                 ) {
                     Log.d(this@RemoteDataSource.toString(), "get Movie Korea Berhasil")
-                    callbackTv.getTvKoreaAsync(response.body()?.hasil)
+                    callback.getTvKoreaAsync(response.body()?.results)
                     //espreso
                 }
 
@@ -65,19 +61,19 @@ class RemoteDataSource {
             })
     }
 
-    fun getMovieKoreaDetail(callbackMovieDetail: MovieKoreaDetailCallback, id: Int) {
-        NetworkConfig.getApiService().getMovieKoreaDetail(id)
-            .enqueue(object : Callback<MovieRemoteResponse> {
+    fun getMovieKoreaDetail(callback: MovieKoreaDetailCallback, id: Int) {
+        NetworkConfig.getApiService().getMovieDetails(id,API_KEY)
+            .enqueue(object : Callback<MovieDetailResponse> {
                 override fun onResponse(
-                    call: Call<MovieRemoteResponse>,
-                    response: Response<MovieRemoteResponse>
+                    call: Call<MovieDetailResponse>,
+                    response: Response<MovieDetailResponse>
                 ) {
                     Log.d(this@RemoteDataSource.toString(), "get Movie Detail Korea Berhasil")
-                    response.body()?.let { callbackMovieDetail.getMovieKoreaDetailAsync(it) }
+                    response.body()?.let { callback.getMovieKoreaDetailAsync(it) }
                     //espreso
                 }
 
-                override fun onFailure(call: Call<MovieRemoteResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MovieDetailResponse>, t: Throwable) {
                     Log.d(this@RemoteDataSource.toString(), "get Movie Korea GAGAL : ${t.message}")
                     //espreso
                 }
@@ -86,19 +82,19 @@ class RemoteDataSource {
             })
     }
 
-    fun getTvKoreaDetail(callbackTvDetail: TvKoreaDetailCallback, id: Int) {
-        NetworkConfig.getApiService().getTvKoreaDetail(id)
-            .enqueue(object : Callback<TvRemoteResponse> {
+   fun getTvKoreaDetail(callback: TvKoreaDetailCallback, id: Int) {
+        NetworkConfig.getApiService().getTvDetails(id, API_KEY)
+            .enqueue(object : Callback<TvDetailResponse> {
                 override fun onResponse(
-                    call: Call<TvRemoteResponse>,
-                    response: Response<TvRemoteResponse>
+                    call: Call<TvDetailResponse>,
+                    response: Response<TvDetailResponse>
                 ) {
                     Log.d(this@RemoteDataSource.toString(), "get Movie Detail Korea Berhasil")
-                    response.body()?.let { callbackTvDetail.getTvKoreaDetailAsync(it) }
+                    response.body()?.let { callback.getTvKoreaDetailAsync(it) }
                     //espreso
                 }
 
-                override fun onFailure(call: Call<TvRemoteResponse>, t: Throwable) {
+                override fun onFailure(call: Call<TvDetailResponse>, t: Throwable) {
                     Log.d(this@RemoteDataSource.toString(), "get Movie Korea GAGAL : ${t.message}")
                     //espreso
                 }
@@ -109,24 +105,24 @@ class RemoteDataSource {
 
     interface MovieKoreaCallback {
 
-        fun getMovieKoreaAsync(movieKorea: List<MovieKorea>?)
+        fun getMovieKoreaAsync(movieKorea: List<M>?)
     }
 
     interface MovieKoreaDetailCallback {
-        fun getMovieKoreaDetailAsync(movieDetail: MovieRemoteResponse?) {
+        fun getMovieKoreaDetailAsync(movieDetail: MovieDetailResponse) {
 
         }
     }
 
     interface TvKoreaCallback {
-        fun getTvKoreaAsync(tvKorea: List<TvKorea>?) {
+        fun getTvKoreaAsync(tvKorea: List<T>?) {
 
         }
 
     }
 
     interface TvKoreaDetailCallback {
-        fun getTvKoreaDetailAsync(tvDetail: TvRemoteResponse?) {
+        fun getTvKoreaDetailAsync(tvDetail: TvDetailResponse) {
 
         }
 

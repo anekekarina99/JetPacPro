@@ -3,11 +3,15 @@ package com.android.jetpacprodua.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.jetpacprodua.data.source.local.entity.MovieKorea
+import com.android.jetpacprodua.data.source.local.entity.MovieKoreaDetail
 import com.android.jetpacprodua.data.source.local.entity.TvKorea
+import com.android.jetpacprodua.data.source.local.entity.TvKoreaDetail
 import com.android.jetpacprodua.data.source.remote.MovieTvDataSource
 import com.android.jetpacprodua.data.source.remote.RemoteDataSource
-import com.android.jetpacprodua.data.source.remote.response.MovieRemoteResponse
-import com.android.jetpacprodua.data.source.remote.response.TvRemoteResponse
+import com.android.jetpacprodua.data.source.remote.response.M
+import com.android.jetpacprodua.data.source.remote.response.MovieDetailResponse
+import com.android.jetpacprodua.data.source.remote.response.T
+import com.android.jetpacprodua.data.source.remote.response.TvDetailResponse
 
 
 class AllRepository private constructor(private val remoteDataSource: RemoteDataSource) :
@@ -25,20 +29,24 @@ class AllRepository private constructor(private val remoteDataSource: RemoteData
 
     override fun getMovieKoreaPopular(): LiveData<List<MovieKorea>> {
         val movieKoreaResult = MutableLiveData<List<MovieKorea>>()
-        remoteDataSource.getMovieKoreaPopular(object : RemoteDataSource.MovieKoreaCallback {
-            override fun getMovieKoreaAsync(movieKorea: List<MovieKorea>?) {
+        remoteDataSource.getMovieKoreaPopular(callback = object : RemoteDataSource.MovieKoreaCallback {
+            override fun getMovieKoreaAsync(movieKorea: List<M>?) {
                 val movieL = ArrayList<MovieKorea>()
-                for (movieRes in movieL) {
-                    val movie = movieRes.let {
-                        MovieKorea(
-                            it.id,
-                            it.poster_path,
-                            it.overview,
-                            it.title,
-                            it.vote_average
-                        )
+                if (movieKorea != null) {
+                    for (movieRes in movieKorea) {
+                        val movie = movieRes.let {
+                            MovieKorea(
+                                it.id,
+                                it.title,
+                                it.overview,
+                                it.popularity,
+                                it.posterPath,
+                                it.voteAverage,
+                                it.voteCount,
+                            )
+                        }
+                        movieL.add(movie)
                     }
-                    movieL.add(movie)
                 }
                 movieKoreaResult.postValue(movieL)
             }
@@ -47,18 +55,20 @@ class AllRepository private constructor(private val remoteDataSource: RemoteData
         return movieKoreaResult
     }
 
-    override fun getMovieKoreaDetail(id: Int): LiveData<MovieKorea> {
-        val movieKdetail = MutableLiveData<MovieKorea>()
+    override fun getMovieKoreaDetail(id: Int): LiveData<MovieKoreaDetail> {
+        val movieKdetail = MutableLiveData<MovieKoreaDetail>()
         remoteDataSource.getMovieKoreaDetail(object : RemoteDataSource.MovieKoreaDetailCallback {
-            override fun getMovieKoreaDetailAsync(movieDetail: MovieRemoteResponse?) {
+            override fun getMovieKoreaDetailAsync(movieDetail: MovieDetailResponse) {
 
-                val detMov = movieDetail?.let {
-                    MovieKorea(
+                val detMov = movieDetail.let {
+                    MovieKoreaDetail(
                         it.id,
-                        it.poster,
                         it.overview,
+                        it.popularity,
+                        it.posterPath,
+                        it.releaseDate,
                         it.title,
-                        it.vote_average
+                        it.rating
                     )
                 }
                 movieKdetail.postValue(detMov)
@@ -72,39 +82,43 @@ class AllRepository private constructor(private val remoteDataSource: RemoteData
     override fun getTvKoreaPopular(): LiveData<List<TvKorea>> {
         val tvKoreaResult = MutableLiveData<List<TvKorea>>()
         remoteDataSource.getTvKoreaPopular(object : RemoteDataSource.TvKoreaCallback {
-            override fun getTvKoreaAsync(tvKorea: List<TvKorea>?) {
+            override fun getTvKoreaAsync(tvKorea: List<T>?) {
                 val tvL = ArrayList<TvKorea>()
-                for (tvRes in tvL) {
-                    val tv = tvRes.let {
-                        TvKorea(
-                            it.id,
-                            it.poster_path,
-                            it.overview,
-                            it.name,
-                            it.vote_average
-                        )
+                if (tvKorea != null) {
+                    for (tvRes in tvKorea) {
+                        val tv = tvRes.let {
+                            TvKorea(
+                                it.id,
+                                it.name,
+                                it.overview,
+                                it.popularity,
+                                it.posterPath,
+                                it.voteCount
+                            )
+                        }
+                        tvL.add(tv)
                     }
-                    tvL.add(tv)
+                    tvKoreaResult.postValue(tvL)
                 }
-                tvKoreaResult.postValue(tvL)
             }
 
         })
         return tvKoreaResult
     }
 
-    override fun getDetailTvKorea(id: Int): LiveData<TvKorea> {
-        val tvKdetail = MutableLiveData<TvKorea>()
+    override fun getDetailTvKorea(id: Int): LiveData<TvKoreaDetail> {
+        val tvKdetail = MutableLiveData<TvKoreaDetail>()
         remoteDataSource.getTvKoreaDetail(object : RemoteDataSource.TvKoreaDetailCallback {
-            override fun getTvKoreaDetailAsync(tvDetail: TvRemoteResponse?) {
+            override fun getTvKoreaDetailAsync(tvDetail: TvDetailResponse) {
 
-                val detTv = tvDetail?.let {
-                    TvKorea(
+                val detTv = tvDetail.let {
+                    TvKoreaDetail(
                         it.id,
-                        it.poster,
-                        it.overview,
                         it.name,
-                        it.vote_average
+                        it.overview,
+                        it.popularity,
+                        it.posterPath,
+                        it.voteCount,
                     )
                 }
                 tvKdetail.postValue(detTv)

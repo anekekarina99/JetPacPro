@@ -7,7 +7,6 @@
     tools:context=".ui.splash.MainActivity">
 
     <ImageView
-        android:id="@+id/iconSplash"
         android:layout_width="208dp"
         android:layout_height="208dp"
         android:layout_marginStart="80dp"
@@ -18,7 +17,6 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -30,7 +28,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textSubSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -1,10 +1,10 @@
 package com.android.jetpacprodua.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.android.jetpacprodua.R
 
-class DetailActivity : AppCompatActivity() {
+class DetailTvActivity : AppCompatActivity() {
 
     companion object{
 
@@ -13,6 +13,6 @@ class DetailActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.activity_detail_tv)
     }
 }

@@ -2,8 +2,8 @@ package com.android.jetpacprodua.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.android.jetpacprodua.data.source.local.entity.MovieKorea
-import com.android.jetpacprodua.data.source.local.entity.TvKorea
+import com.android.jetpacprodua.data.source.local.entity.MovieKoreaDetail
+import com.android.jetpacprodua.data.source.local.entity.TvKoreaDetail
 import com.android.jetpacprodua.repository.AllRepository
 
 class DetailViewModel(private val allRepository: AllRepository) : ViewModel() {
@@ -13,13 +13,13 @@ class DetailViewModel(private val allRepository: AllRepository) : ViewModel() {
         this.id = id
     }
 
-    fun getMovieKoreaDetail(): LiveData<MovieKorea>? = id?.let {
+    fun getMovieKoreaDetail(): LiveData<MovieKoreaDetail>? = id?.let {
         allRepository.getMovieKoreaDetail(
             it
         )
     }
 
-    fun getTvKoreaDetail(): LiveData<TvKorea>? = id?.let {
+    fun getTvKoreaDetail(): LiveData<TvKoreaDetail>? = id?.let {
         allRepository.getDetailTvKorea(
             it
         )

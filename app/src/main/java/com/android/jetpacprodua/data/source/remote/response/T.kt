@@ -1,10 +1,8 @@
-package com.android.jetpacprodua.data.source.local.entity
-
+package com.android.jetpacprodua.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-
-data class TvKorea(
+data class T (
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
@@ -16,6 +14,5 @@ data class TvKorea(
     @SerializedName("poster_path")
     val posterPath: String,
     @SerializedName("vote_count")
-    val voteCount: Int
-
+    val voteCount: Int,
 )

@@ -1,7 +1,9 @@
 package com.android.jetpacprodua.data.source.remote.api
 
 
+import com.android.jetpacprodua.data.source.remote.response.MovieDetailResponse
 import com.android.jetpacprodua.data.source.remote.response.MovieRemoteResponse
+import com.android.jetpacprodua.data.source.remote.response.TvDetailResponse
 import com.android.jetpacprodua.data.source.remote.response.TvRemoteResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,21 +12,23 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("movie/popular?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK&page=1&region=KR")
-    fun getMovieKoreaPopular(
+    @GET("movie/popular")
+    fun getMoviePopular(
+        @Query("api_key") apiKey: String,
     ): Call<MovieRemoteResponse>
 
-    @GET("movie/{id}?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK")
-    fun getMovieKoreaDetail(
-        @Path("id") id: Int,
-    ): Call<MovieRemoteResponse>
+    @GET("movie/{movie_id}")
+    fun getMovieDetails(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): Call<MovieDetailResponse>
 
-    @GET("tv/popular?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK&page=1&region=KR")
-    fun getTvKoreaPopular(
+    @GET("tv/{tv_id}")
+     fun getTvDetails(@Path("tv_id") id: Int, @Query("api_key") apiKey: String): Call<TvDetailResponse>
+
+    @GET("tv/popular")
+    fun getTvList(
+        @Query("api_key") apiKey: String
     ): Call<TvRemoteResponse>
 
-    @GET("tv/{id}?api_key=5829da11901d652c0ebdcb4c5bfa7015&language=en-UK")
-    fun getTvKoreaDetail(
-        @Path("id") id: Int,
-    ): Call<TvRemoteResponse>
 }

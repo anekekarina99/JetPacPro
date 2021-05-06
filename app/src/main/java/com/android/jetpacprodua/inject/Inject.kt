@@ -1,11 +1,10 @@
 package com.android.jetpacprodua.inject
 
-import android.content.Context
 import com.android.jetpacprodua.data.source.remote.RemoteDataSource
 import com.android.jetpacprodua.repository.AllRepository
 
 object Inject {
-    fun provideRepository(context: Context): AllRepository {
+    fun provideRepository(): AllRepository {
 
         val remoteDataSource = RemoteDataSource.getInst()
 

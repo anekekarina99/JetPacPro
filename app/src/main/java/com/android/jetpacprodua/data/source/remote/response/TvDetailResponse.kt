@@ -1,24 +1,18 @@
-package com.android.jetpacprodua.data.source.local.entity
+package com.android.jetpacprodua.data.source.remote.response
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class MovieKorea(
+data class TvDetailResponse(
     @SerializedName("id")
     val id: Int,
-    @SerializedName("original_title")
-    val originalTitle: String,
+    @SerializedName("name")
+    val name: String,
     @SerializedName("overview")
     val overview: String,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
     val posterPath: String,
-    @SerializedName("vote_average")
-    val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-
-) : Parcelable
+)
