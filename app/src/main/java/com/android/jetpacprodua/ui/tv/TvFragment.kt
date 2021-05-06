@@ -28,7 +28,7 @@ class TvFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
 
-            val factory = ViewModelFactory.getInst(requireActivity())
+            val factory = ViewModelFactory.getInst()
             val viewModel = ViewModelProvider(this, factory)[TvViewModel::class.java]
 
             val tAdapter = TvAdapter()

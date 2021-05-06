@@ -6,6 +6,7 @@
     tools:context=".ui.tv.TvFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTv"
             tools:showIn="@layout/item_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

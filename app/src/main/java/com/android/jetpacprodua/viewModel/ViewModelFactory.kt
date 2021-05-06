@@ -1,6 +1,5 @@
 package com.android.jetpacprodua.viewModel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.android.jetpacprodua.inject.Inject
@@ -17,7 +16,7 @@ class ViewModelFactory private constructor(private val factAllRepos: AllReposito
         @Volatile
         private var inst: ViewModelFactory? = null
 
-        fun getInst(context: Context): ViewModelFactory =
+        fun getInst(): ViewModelFactory =
             inst ?: synchronized(this)
             {
                 ViewModelFactory(Inject.provideRepository()).apply {
